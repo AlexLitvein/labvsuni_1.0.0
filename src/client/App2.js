@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Spinner from './components/spinner/Spinner.js';
+import Spinner from '../components/spinner/Spinner.js';
 // import '../media/snowflake.svg';
 import '../media/home.jpg';
 

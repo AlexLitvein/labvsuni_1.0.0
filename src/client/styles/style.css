@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  background-color: chocolate;
+  /* display: flex;
+  justify-content: space-around; */
+  height: 100vh;
+}
+
+.wrpSvg {
+  /* border: 1px dashed green; */
+  background-color: rgb(223, 128, 128);
+  /* flex-grow: 1;
+  margin: 100px;
+  position: relative; */  
+  height: 50%; 
+}
+
+svg {  
+  /* родитель должен обязательно иметь привязку по высоте к чему-либо */
+  /* border: 1px dashed black; */
+  background-color: rgb(109, 255, 80);
+  font-size: 14px;
+  /* position: absolute; */
+  /* shape-rendering:geometricPrecision;     */
+  box-sizing: border-box;
+  /* width: 100%; */
+  user-select: none;
+}
+
+.path-data{
+  stroke-width: 2px;
+  /* stroke: blue;    */
+  fill: none;
+  /* opacity: 0; */
+  /* stroke-dasharray: 3 6; */
+  /* marker: url('#mrkPaths'); */
+  transition: opacity 1s;
+}
+
+.path-data:hover{
+  stroke-width: 3px;
+}
+
+.visible{
+  opacity: 1;
+}
+
+.axis{
+  stroke: black;
+  stroke-width: 2px;
+  fill: none;
+  marker: url('#mrkVHAxis');
+}
+
+.txt-axis{
+  /* font-family: lato-normal; */
+  /* font-size: 10px; */
+  text-anchor: end;
+  /* text-align: left; */
+  /* transform: rotate(-90deg); фигня выходит */
+  /* transform: translate(); */
+}
+
+.cursor{
+  fill: none;
+  stroke: #828282;
+  stroke-width: 2px;
+  stroke-dasharray: 2, 4;
+}
+
+.note{
+  fill:chocolate;
+  stroke: black;
+  stroke-width: 2px;
+  /* stroke-dasharray: 4, 4; */
+  stroke-linejoin:round;
+}
+
+.note-text{
+  /* font-size: 10px; */
+}
+
+.mrk-axis{
+  /* fill: none; */
+  stroke: black;
+  stroke-width: 2px;
+  
+  /* display: none; */
+}
