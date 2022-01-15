@@ -23,15 +23,15 @@ code {
   /* border: 1px dashed green; */
   background-color: rgb(223, 128, 128);
   /* flex-grow: 1;
-  margin: 100px;
-  position: relative; */  
+  margin: 100px; */
+  position: relative;  
   height: 50%; 
 }
 
 svg {  
   /* родитель должен обязательно иметь привязку по высоте к чему-либо */
   /* border: 1px dashed black; */
-  background-color: rgb(109, 255, 80);
+  /* background-color: rgb(109, 255, 80); */
   font-size: 14px;
   /* position: absolute; */
   /* shape-rendering:geometricPrecision;     */
@@ -96,7 +96,7 @@ svg {
 .mrk-axis{
   /* fill: none; */
   stroke: black;
-  stroke-width: 2px;
+  /* stroke-width: 2px; */
   
   /* display: none; */
 }

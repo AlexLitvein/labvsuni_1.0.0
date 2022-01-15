@@ -1,5 +1,5 @@
 export const SET_STATUS = 'SET_STATUS';
-export const STATUS_EMPTY = 'NO DATA';
+export const STATUS_EMPTY = '';
 export const STATUS_LOADING = 'LOADING...';
 export const STATUS_LOADED = 'LOADED';
 export const STATUS_ERROR = 'ERROR!';

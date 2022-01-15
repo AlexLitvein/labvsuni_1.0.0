@@ -16,8 +16,11 @@ import Button from '@mui/material/Button';
 // import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import Spinner from './components/Spinner/Spinner';
 // import {DatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 // import AdapterDateFns from '@date-io/date-fns';
+import './media/snowflake.svg';
+import { selStatus } from './reducers/status/sels';
 
 const axis = {
   _id: {
@@ -54,6 +57,7 @@ const axis = {
   },
 };
 
+// options.[\w]* ?=
 const options = {
   padding: { top: 20, right: 10, bottom: 60, left: 30 },
   // fontH: 10, //?
@@ -71,10 +75,12 @@ const options = {
 function App() {
   const dispatch = useDispatch();
   const dataSets = useSelector(selDataSets);
+  const dataStatus = useSelector(selStatus);
 
   // const [date, setDate] = useState(new Date(Date.now()));
   const [date, setDate] = useState(new Date('2021-11-01'));
   const [range, setRange] = useState(5);
+  // const [spinAct, setSpinAct] = useState('');
 
   // NOTE! входные данные массив объектов, например:
   // [
@@ -179,6 +185,7 @@ function App() {
       </div>
       <div className='wrpSvg'>
         <SvgChart options={options} axis={axis} dataSets={dataSets} />
+        <Spinner msg={dataStatus} img='media/snowflake.svg#snowflake'></Spinner>
       </div>
     </div>
   );

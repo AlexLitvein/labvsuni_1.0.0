@@ -4,6 +4,7 @@ import statusRdcr from '../reducers/status/rdcr';
 // import { setError, setLoaded, setLoading } from '../rdcrs/status/acts';
 // import { remote_data } from './remoteData';
 import { GET_SENS_DATA, dataSetsRdcr, setDataSet } from '../reducers/dbdata';
+import { setStatus } from '../reducers/status/acts';
 const { call, put, takeLatest, delay } = require('redux-saga/effects');
 
 async function fetchJson(url, date, range) {
@@ -43,6 +44,7 @@ function* fetchSensData(act) {
   // console.log('fetchSensData', act);
   try {
     // yield put(setLoading());
+    yield put(setStatus('Loading...'));
     // const receivedData = yield remote_data[act.payload.date].slice(0, act.payload.range);
     const receivedData = yield fetchJson(
       'http://localhost:3000/weather/getSensData',
@@ -51,17 +53,24 @@ function* fetchSensData(act) {
     );
     // console.log('receivedData', receivedData);
     const data = yield call(act.payload.func, receivedData);
-    // yield delay(1000);
+
+    yield delay(300);
+
+    yield put(setStatus('Ok'));
     yield put(setDataSet(data)); //{ data }
+
+    yield delay(300);
+    yield put(setStatus(''));
     // yield put(setLoaded());
   } catch (e) {
-    // yield put(setError(e.message));
+    // yield put(setStatus('Error'));
   }
 }
 
 function* sagaWatcher() {
   console.log('sagaWatcher');
   yield takeLatest(GET_SENS_DATA, fetchSensData);
+  // yield takeLatest(GET_SENS_DATA, fetchSensData);
 }
 
 sagaMiddleware.run(sagaWatcher);

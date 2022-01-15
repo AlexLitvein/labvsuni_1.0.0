@@ -29,19 +29,6 @@ let db = null;
 // const { default: SvgChart } = require('./components/SvgChart.js');
 // const { default: App } = require('./client/App.jsx');
 
-// const axis = {
-//   _id: { name: 'Дата', min: 0, max: 0, type: 'H', cls: 'axis', clrPath: '#000ff00' },
-//   t: { name: 'Температура', min: -50, max: 50, type: 'V', cls: 'axis', clrPath: '#FF0000' },
-//   p: { name: 'Давление', min: 0, max: 1000, type: 'V', cls: 'axis', clrPath: '#4F4FD9' },
-//   h: { name: 'Влажность', min: 0, max: 100, type: 'V', cls: 'axis', clrPath: '#FFFA40' },
-// };
-
-// const options = {
-//   padding: { top: 20, right: 10, bottom: 60, left: 30 },
-//   countVLabels: 3,
-//   axisTxtOffs: 8,
-// };
-
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

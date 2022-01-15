@@ -1,4 +1,6 @@
-import * as actions from './acts';
+// import * as actions from './acts';
+
+import { SET_STATUS, STATUS_EMPTY } from './acts';
 
 // export const STATUS = {
 //     EMPTY: 0,
@@ -8,49 +10,24 @@ import * as actions from './acts';
 // };
 
 const initialState = {
-  status: actions.STATUS_EMPTY, // STATUS.EMPTY,
-  error: null,
+  status: STATUS_EMPTY,
+  // error: null,
 };
 
 export default function statusRdcr(state = initialState, action) {
-  return {
-    ...state,
-    status: action.payload,
-  };
+  // return {
+  //   ...state,
+  //   status: action.payload,
+  // };
 
-  // switch (action.type) {
-  //     case SET_STATUS:
-  //         return {
-  //             ...state,
-  //             status:  action.payload,
-  //         };
+  switch (action.type) {
+    case SET_STATUS:
+      return {
+        ...state,
+        status: action.payload,
+      };
 
-  //     case action.SET_EMPTY_STATUS:
-  //         return {
-  //             ...state,
-  //             status: STATUS.EMPTY,
-  //         };
-
-  //     case action.SET_LOADING_STATUS:
-  //         return {
-  //             ...state,
-  //             status: STATUS.LOADING,
-  //         };
-
-  //     case action.SET_LOADED_STATUS:
-  //         return {
-  //             ...state,
-  //             status: STATUS.LOADED,
-  //         };
-
-  //     case action.SET_ERROR_STATUS:
-  //         return {
-  //             ...state,
-  //             status: STATUS.ERROR,
-  //             error: action.payload
-  //         };
-
-  //     default:
-  //         return state;
-  // }
+    default:
+      return state;
+  }
 }
