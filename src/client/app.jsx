@@ -72,8 +72,9 @@ function App() {
   const dispatch = useDispatch();
   const dataSets = useSelector(selDataSets);
 
-  const [date, setDate] = useState(new Date(Date.now()));
-  const [range, setRange] = useState(2);
+  // const [date, setDate] = useState(new Date(Date.now()));
+  const [date, setDate] = useState(new Date('2021-11-01'));
+  const [range, setRange] = useState(5);
 
   // NOTE! входные данные массив объектов, например:
   // [

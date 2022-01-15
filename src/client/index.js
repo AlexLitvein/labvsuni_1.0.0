@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import MyStore from './store/DataController';
+import MyStore from './store/saga';
 // import './index.css';
 import './styles/style.css';
 import App from './app.jsx';

@@ -4,27 +4,18 @@ export function ChartCursor({ svgElm, options, axis, data }) {
     console.log("Call ChartCursor");
 
     options.noteW = 0;
-    options.noteH = 0;
+    options.noteH = options.axisTxtOffs;
+    const [pos, setPos] = useState({ x: 0, y: 0 });
 
-    const [_x, setX] = useState(options.rcClient.right);
-    const [_y, setY] = useState(options.rcClient.top);
-
-    const testPosX = (x) => {
+    const testPos = (x, y) => {
+        const right = options.rcClient.left + options.lnHSeg * options.numHSeg;
         x = x < options.rcClient.left ? options.rcClient.left : x;
-        x = x > options.rcClient.right ? options.rcClient.right : x;
+        // x = x > options.rcClient.right ? options.rcClient.right : x;
+        x = x > right ? right : x;
 
-        // console.log(`x ${x} options.rcClient.bottom ${options.rcClient.bottom} `);
-        return x;
-    }
-    const testPosY = (y) => {
         y = y < options.rcClient.top ? options.rcClient.top : y;
         y = y > options.rcClient.bottom ? options.rcClient.bottom : y;
-        return y;
-    }
-
-    const setPos = (x, y) => {
-        setX(testPosX(x));
-        setY(testPosY(y));
+        return { x, y };
     }
 
     const aprox = (v1, v2, range, posInRange) => {
@@ -62,46 +53,51 @@ export function ChartCursor({ svgElm, options, axis, data }) {
             }
 
             let str = `${axis[key].name}: ${res}`;
-            const sz = options.getStrBoundSize(str);
-            options.noteW = sz.width > options.noteW ? sz.width + options.axisTxtOffs : options.noteW;
+            const sz = options.getStrBoundSize(str, "note-text");
+            // options.noteW = sz.width > options.noteW ? sz.width + (options.axisTxtOffs << 1) : options.noteW;
+            options.noteW = sz.width > options.noteW ? sz.width : options.noteW;
             options.noteH += sz.height;
             out.push({ clr: axis[key].clrPath, txt: str });
-        }
 
+            // console.log('sz.height', sz.height);
+        }
+        options.noteW += (options.axisTxtOffs << 1); // добавляем отступы к ширине
         return out;
     }
 
     useEffect(() => {
+        setPos(testPos(options.rcClient.left + options.lnHSeg, options.rcClient.top));
+    }, [options.rcClient]);
+
+    useEffect(() => {
         svgElm.current.addEventListener('click', (e) => {
-            setPos(e.offsetX, e.offsetY);
-            // console.log(`rc.left ${rc.left} rc.right ${rc.right} rc.bottom ${rc.bottom}`);
+            console.log('click');
+            setPos(testPos(e.offsetX, e.offsetY));
         });
 
         svgElm.current.addEventListener('mousemove', (e) => {
-
-            // console.log('mouseover', e);
             if (e.buttons === 1) {
-                setPos(e.offsetX, e.offsetY);
+                console.log('mousemove');
+                setPos(testPos(e.offsetX, e.offsetY));
             }
         });
-
     }, []); // componentDidMount()
 
     return (
         <>
             {console.log('draw ChartCursor')}
 
-            <path d={`M${_x} ${options.rcClient.top}V${options.rcClient.bottom}`} className="cursor"></path>
-            <FlyNote x={_x} y={_y} options={options} arrStr={getVal(_x, _y, 0)} />
+            <path d={`M${pos.x} ${options.rcClient.top}V${options.rcClient.bottom}`} className="cursor"></path>
+            <FlyNote x={pos.x} y={pos.y} options={options} arrStr={getVal(pos.x, pos.y, 0)} />
         </>
     );
 }
 
 export function FlyNote({ x, y, options, arrStr }) {
-    // console.log('FlyNote gObj', gObj);
-    const testPos = () => {
-        let out = { x: x, y: y, };
-        if (out.x + options.noteW > options.rcClient.right) {
+    const testPos = (x, y) => {
+        let out = { x, y };
+        const right = options.rcClient.left + options.lnHSeg * options.numHSeg
+        if (out.x + options.noteW > right) {
             out.x = out.x - options.noteW;
         }
         if (out.y + options.noteH > options.rcClient.bottom) {
@@ -119,17 +115,19 @@ export function FlyNote({ x, y, options, arrStr }) {
         `)
     }
 
-    const [pos, setPos] = useState({ x: 0, y: 0 });
+    const [pos, setPos] = useState({ x, y });
     useEffect(() => {
-        setPos(testPos());
+        setPos(testPos(x, y));
     }, [x, y]);
 
-    if (options.noteW) {
+    if (arrStr.length !== 0) {
         return (
             <>
                 <path d={createRoundRect(pos.x, pos.y, options.noteW, options.noteH, 6)} className="note" />
+
                 {arrStr.map((el, i) => {
-                    return <text key={i} x={pos.x + 4} y={pos.y + (options.fontBBoxHeight * 0.7) + (i + 0) * options.fontBBoxHeight} className="note-text" fill={el.clr}>{el.txt}  </text>;
+                    let hStr = (options.noteH - options.axisTxtOffs) / arrStr.length;
+                    return <text className="note-text" key={i} x={pos.x + options.axisTxtOffs} y={pos.y + hStr + i * hStr} fill={el.clr}>{el.txt}  </text>;
                 })
                 }
             </>
