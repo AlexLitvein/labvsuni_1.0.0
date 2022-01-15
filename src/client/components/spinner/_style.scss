@@ -2,6 +2,7 @@
     position: absolute;
     top: 0;
     display: flex;
+    visibility: hidden;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -11,7 +12,7 @@
     text-align: center;
     color: lightgray;
 
-    transition: opacity 300ms linear 0s;
+    transition: visibility 300ms, opacity 300ms linear 0s;
 
     &-img{
         width: 32px;

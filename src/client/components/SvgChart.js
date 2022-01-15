@@ -82,19 +82,6 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
     return d;
   };
 
-  // options.calcStride = (minLen, totalLen, count) => {
-  //     let i = 24, stride = 0;
-  //     for (; i > 0; i--) {
-  //         if (24 % i === 0) {
-  //             let dxVLine = totalLen / (i * count);
-  //             if (dxVLine > minLen) {
-  //                 stride = 24 / i;
-  //                 break;
-  //             }
-  //         }
-  //     }
-  //     return stride || 1;
-  // }
   options.calcStride = (minLen, totalLen, count) => {
     let i = count,
       stride = 0;
@@ -109,23 +96,12 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
     }
     return stride || 1;
   };
-  // const buildAxlePath = (rc, type) => {
-  //     return options.getOrthoLine(
-  //         rc.left,
-  //         type === 'H' ? rc.top + (options.lnVSeg * options.numVSeg) : rc.top,
-  //         type === 'H' ? (rc.right - rc.left) : (rc.bottom - rc.top),
-  //         type === 'H' ? options.numHSeg : options.numVSeg,
-  //         type
-  //     );
-  // }
 
   const calcPadding = () => {
-    // let szHText = { width: 0, height: 0 };
-    // let szVText = { width: 0, height: 0 };
-    // let szText = { width: 0, height: 0 };
     let left = 0;
     let bottom = 0;
     let tmpSz = 0;
+    let topAcc = 0;
 
     if (dataSets.length !== 0) {
       let dataObj = dataSets[0];
@@ -136,18 +112,16 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
           bottom = options.getStrBoundSize(
             _formatDateStr(dataObj[key][0])
           ).width;
-          //   szText.height = options.getStrBoundSize(
-          //     _formatDateStr(dataObj[key][0])
-          //   );
         } else {
           // вертикальная ось
-          tmpSz = options.getStrBoundSize(el.max).width;
-          left = tmpSz > left ? tmpSz : left;
-          //   szText.width = tmpSz > szText.width ? tmpSz : szText.width;
+          tmpSz = options.getStrBoundSize(el.max);
+          left = tmpSz.width > left ? tmpSz.width : left;
+          topAcc += tmpSz.height;
         }
       }
-      options.padding.left = left + options.axisTxtOffs;
-      options.padding.bottom = bottom + options.axisTxtOffs;
+      options.padding.top = topAcc / 2 + options.axisTxtOffs * 2;
+      options.padding.left = left + options.axisTxtOffs * 2;
+      options.padding.bottom = bottom + options.axisTxtOffs * 2;
     }
     // console.log(`szHText ${szHText} szVText ${szVText}`);
   };
@@ -351,18 +325,10 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
     return out;
   };
 
-  // const renderedDataSet = useMemo(() => {
-  //     // const out = [];
-  //     console.log("useMemo");
-  //     // aniTrigEl.current?.beginElement();
-  //     return dataSets.map((itm, idx) => {
-  //         return renderDataSet(itm, idx);
-  //     });
-  //     // return renderDataSets();
-  // }, [dataSets, sz]);//
-
   useEffect(() => {
     if (dataSets.length !== 0) {
+      //   calcPadding();
+
       aniTrigEl.current?.beginElement();
     }
   }, [dataSets]);
@@ -370,7 +336,7 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
   useEffect(() => {
     console.log('SvgChart useEffect');
     resize();
-    calcPadding();
+    // calcPadding();
 
     window.addEventListener('resize', (e) => {
       resize();
@@ -382,6 +348,7 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
     <svg id='graph' ref={svgElm} width={sz.w} height={sz.h}>
       {console.log('draw SvgChart')}
 
+      {calcPadding()}
       {/* {console.log('options.rcClient before', options.rcClient)} */}
 
       <path className='path-data' style={{ stroke: 'blue' }} d='M0 -10h10'>

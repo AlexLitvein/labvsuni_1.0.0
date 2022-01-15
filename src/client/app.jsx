@@ -62,7 +62,7 @@ const options = {
   padding: { top: 20, right: 10, bottom: 60, left: 30 },
   // fontH: 10, //?
   countVLabels: 3,
-  axisTxtOffs: 8,
+  axisTxtOffs: 4,
   // fontBBoxHeight: 0,
   // biggestDataStrBBoxWidth: 0,
   // svgElm: null,

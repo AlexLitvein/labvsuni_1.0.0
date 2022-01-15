@@ -57,10 +57,13 @@ function* fetchSensData(act) {
     yield delay(300);
 
     yield put(setStatus('Ok'));
-    yield put(setDataSet(data)); //{ data }
-
     yield delay(300);
     yield put(setStatus(''));
+
+    yield put(setDataSet(data)); //{ data }
+
+    // yield delay(300);
+    // yield put(setStatus(''));
     // yield put(setLoaded());
   } catch (e) {
     // yield put(setStatus('Error'));
