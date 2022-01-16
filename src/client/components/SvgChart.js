@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 // import { selStatus } from "../rdcr/status/sels"; // , STATUS
 import { ChartCursor } from './ChartCursor';
 // import Spinner from "./Spinner";
-import { AniPath, Axle, ChartAxis, SvgMarker } from './SvgComps';
+import { AniPath, ChartAxis, SvgMarker } from './SvgComps';
 import { TextGroup } from './SvgTextGroup';
 import './_chart.scss';
 
@@ -27,6 +27,8 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
   //   options.cut = (n) => Math.trunc(n); // лучше отсекать, чем округлять, иначе сумма сегментов иногда будет больше отрезка в который они должны уложиться
   // умножение на 0.1 вместо деления на 10, порождает много цифр после запятой
   options.cut = (n) => Math.trunc(n * 10) / 10; // * 0.1
+
+  // options.cut = (n) => Math.round(n);
 
   // const cut = (n) => Math.ceil(n);
   // const cut = (n) => (Math.trunc(n * 10)) / 10;
@@ -343,7 +345,7 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
       {/* {calcPadding()} */}
       {/* {console.log('options.rcClient before', options.rcClient)} */}
 
-      <path className='path-data' style={{ stroke: 'blue' }} d='M0 -10h10'>
+      <path className='chart1i0i0-path' style={{ stroke: 'blue' }} d='M0 -10h10'>
         <animate
           id='ani_trigg'
           ref={aniTrigEl}
@@ -368,7 +370,17 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
                 <animate id="animation" attributeName="width" attributeType="XML" values="20;10;20" begin="0s" dur="3s" repeatDur="indefinite" end="ani_p.begin" />
             </rect> */}
 
-      <SvgMarker id={'mrkVHAxis'} cls={'mrk-axis'} w={2} h={6} refX={0} refY={6} mrkEl={<line x2='0' y2='6' />} />
+      {/* cls={'mrk-axis'} */}
+
+      <SvgMarker
+        id={'mrkVHAxis'}
+        cls='chart1i0i0-axis_marker'
+        w={2}
+        h={6}
+        refX={0}
+        refY={6}
+        mrkEl={<line x2='0' y2='6' />}
+      />
 
       {renderHTextAxis(options.rcClient)}
       {renderVTextAxis(options.rcClient, '_id', dataSets)}

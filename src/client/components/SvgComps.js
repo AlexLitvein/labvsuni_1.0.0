@@ -49,7 +49,7 @@ export const AniPath = ({ id, options, axle, data }) => {
   // }, [data]);
 
   return (
-    <path className={'path-data'} style={{ stroke: axle.clrPath, marker: `url("#mrk_${id}")` }} d={td.d}>
+    <path className='chart1i0i0-path' style={{ stroke: axle.clrPath, marker: `url("#mrk_${id}")` }} d={td.d}>
       <animate id={`ani_${id}`} begin='ani_trigg.begin' attributeName='d' dur='300ms' to={td.t} fill='freeze' />
       {/* <animate id={`ani_${id}`} begin="0s" attributeName="d" dur="1s" fill="freeze" to={td.t} /> */}
     </path>
@@ -96,11 +96,13 @@ export function ChartAxis({ axis, options }) {
 }
 
 export const SvgMarker = ({ id, cls, w, h, refX, refY, mrkEl }) => {
+  // export const SvgMarker = ({ id, className, w, h, refX, refY, mrkEl }) => {
   return (
     <defs>
       <marker
         id={id}
         className={cls}
+        // className={className}
         markerWidth={w}
         markerHeight={h}
         refX={refX}

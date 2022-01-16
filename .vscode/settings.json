@@ -1,6 +1,6 @@
 {
     "css.styleSheets": [  
-        "main.css",  
-        "public/main.css",
+        "./main.css",  
+        "Work/labvsuni/public/main.css",
         ]  
 }

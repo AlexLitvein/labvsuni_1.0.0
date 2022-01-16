@@ -22,13 +22,14 @@ import Spinner from './components/Spinner/Spinner';
 import './media/snowflake.svg';
 import { selStatus } from './reducers/status/sels';
 
+const axisCls = 'chart1i0i0-axis';
 const axis = {
   _id: {
     name: 'Дата',
     min: 0,
     max: 0,
     type: 'H',
-    cls: 'axis',
+    cls: axisCls,
     clrPath: '#000ff00',
   },
   t: {
@@ -36,7 +37,7 @@ const axis = {
     min: -50,
     max: 50,
     type: 'V',
-    cls: 'axis',
+    cls: axisCls,
     clrPath: '#FF0000',
   },
   p: {
@@ -44,7 +45,7 @@ const axis = {
     min: 0,
     max: 1000,
     type: 'V',
-    cls: 'axis',
+    cls: axisCls,
     clrPath: '#4F4FD9',
   },
   h: {
@@ -52,7 +53,7 @@ const axis = {
     min: 0,
     max: 100,
     type: 'V',
-    cls: 'axis',
+    cls: axisCls,
     clrPath: '#FFFA40',
   },
 };
@@ -61,7 +62,7 @@ const axis = {
 const options = {
   padding: { top: 20, right: 10, bottom: 60, left: 60 },
   // fontH: 10, //?
-  countVLabels: 3,
+  countVLabels: 5,
   axisTxtOffs: 4,
   // fontBBoxHeight: 0,
   // biggestDataStrBBoxWidth: 0,

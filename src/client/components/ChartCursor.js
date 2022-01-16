@@ -91,7 +91,7 @@ export function ChartCursor({ svgElm, options, axis, data }) {
     <>
       {console.log('draw ChartCursor')}
 
-      <path d={`M${pos.x} ${options.rcClient.top}V${options.rcClient.bottom}`} className='cursor'></path>
+      <path d={`M${pos.x} ${options.rcClient.top}V${options.rcClient.bottom}`} className='chart1i0i0-cursor'></path>
       <FlyNote x={pos.x} y={pos.y} options={options} arrStr={getVal(pos.x, pos.y, 0)} />
     </>
   );
@@ -127,13 +127,13 @@ export function FlyNote({ x, y, options, arrStr }) {
   if (arrStr.length !== 0) {
     return (
       <>
-        <path d={createRoundRect(pos.x, pos.y, options.noteW, options.noteH, 6)} className='note' />
+        <path d={createRoundRect(pos.x, pos.y, options.noteW, options.noteH, 6)} className='chart1i0i0-note' />
 
         {arrStr.map((el, i) => {
           let hStr = (options.noteH - options.axisTxtOffs) / arrStr.length;
           return (
             <text
-              className='note-text'
+              className='chart1i0i0-note_text'
               key={i}
               x={pos.x + options.axisTxtOffs}
               y={pos.y + hStr + i * hStr}
