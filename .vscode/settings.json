@@ -1,0 +1,6 @@
+{
+    "css.styleSheets": [  
+        "main.css",  
+        "public/main.css",
+        ]  
+}

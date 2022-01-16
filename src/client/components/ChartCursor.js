@@ -31,8 +31,7 @@ export function ChartCursor({ svgElm, options, axis, data }) {
     for (const key in obj) {
       const el = obj[key]; // [21.2, ...]
       let v1 = el[idxDataHit];
-      let v2 =
-        idxDataHit + 1 >= el.length ? el[idxDataHit] : el[idxDataHit + 1];
+      let v2 = idxDataHit + 1 >= el.length ? el[idxDataHit] : el[idxDataHit + 1];
       // console.log(`v1 ${v1} v2 ${v2} idxDataHit + 1 ${idxDataHit + 1}`);
 
       if (axis[key].type === 'H') {
@@ -71,9 +70,7 @@ export function ChartCursor({ svgElm, options, axis, data }) {
   };
 
   useEffect(() => {
-    setPos(
-      testPos(options.rcClient.left + options.lnHSeg, options.rcClient.top)
-    );
+    setPos(testPos(options.rcClient.left + options.lnHSeg, options.rcClient.top));
   }, [options.rcClient]);
 
   useEffect(() => {
@@ -94,15 +91,8 @@ export function ChartCursor({ svgElm, options, axis, data }) {
     <>
       {console.log('draw ChartCursor')}
 
-      <path
-        d={`M${pos.x} ${options.rcClient.top}V${options.rcClient.bottom}`}
-        className='cursor'></path>
-      <FlyNote
-        x={pos.x}
-        y={pos.y}
-        options={options}
-        arrStr={getVal(pos.x, pos.y, 0)}
-      />
+      <path d={`M${pos.x} ${options.rcClient.top}V${options.rcClient.bottom}`} className='cursor'></path>
+      <FlyNote x={pos.x} y={pos.y} options={options} arrStr={getVal(pos.x, pos.y, 0)} />
     </>
   );
 }
@@ -137,10 +127,7 @@ export function FlyNote({ x, y, options, arrStr }) {
   if (arrStr.length !== 0) {
     return (
       <>
-        <path
-          d={createRoundRect(pos.x, pos.y, options.noteW, options.noteH, 6)}
-          className='note'
-        />
+        <path d={createRoundRect(pos.x, pos.y, options.noteW, options.noteH, 6)} className='note' />
 
         {arrStr.map((el, i) => {
           let hStr = (options.noteH - options.axisTxtOffs) / arrStr.length;

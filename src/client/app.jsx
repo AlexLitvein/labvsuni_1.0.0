@@ -59,7 +59,7 @@ const axis = {
 
 // options.[\w]* ?=
 const options = {
-  padding: { top: 20, right: 10, bottom: 60, left: 30 },
+  padding: { top: 20, right: 10, bottom: 60, left: 60 },
   // fontH: 10, //?
   countVLabels: 3,
   axisTxtOffs: 4,
@@ -148,7 +148,7 @@ function App() {
   };
 
   useEffect(() => {
-    console.log('App useEffect');
+    console.log('App useEffect componentDidMount() fetchData');
     fetchData(date, range);
   }, []); // componentDidMount()
 
@@ -165,9 +165,7 @@ function App() {
           />
         </LocalizationProvider>
 
-        <ButtonGroup
-          variant='contained'
-          aria-label='outlined primary button group'>
+        <ButtonGroup variant='contained' aria-label='outlined primary button group'>
           <Button onClick={(e) => onAddDate(-1)}>One</Button>
           <Button onClick={(e) => onAddDate(1)}>Two</Button>
         </ButtonGroup>
