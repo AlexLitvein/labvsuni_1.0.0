@@ -1,0 +1,6 @@
+{
+    "css.styleSheets": [  
+        "./main.css",  
+        "Work/labvsuni/public/main.css",
+        ]  
+}
