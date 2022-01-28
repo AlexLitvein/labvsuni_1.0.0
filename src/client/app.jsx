@@ -19,7 +19,8 @@ import Select from '@mui/material/Select';
 import Spinner from './components/Spinner/Spinner';
 // import {DatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 // import AdapterDateFns from '@date-io/date-fns';
-import './media/snowflake.svg';
+import '../media/snowflake.svg';
+import '../media/refresh.svg';
 import { selStatus } from './reducers/status/sels';
 
 const axisCls = 'chart1i0i0-axis';
@@ -80,7 +81,7 @@ function App() {
 
   // const [date, setDate] = useState(new Date(Date.now()));
   const [date, setDate] = useState(new Date('2021-11-01'));
-  const [range, setRange] = useState(5);
+  const [range, setRange] = useState(1);
   // const [spinAct, setSpinAct] = useState('');
 
   // NOTE! входные данные массив объектов, например:
@@ -155,36 +156,92 @@ function App() {
 
   return (
     <div className='App'>
-      <div id='controls'>
-        <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
-          <DatePicker
-            mask={'__.__.____'}
-            label='Basic example'
-            value={date}
-            onChange={(newVal) => onSetDate(newVal)}
-            renderInput={(params) => <TextField {...params} />}
-          />
-        </LocalizationProvider>
-
-        <ButtonGroup variant='contained' aria-label='outlined primary button group'>
-          <Button onClick={(e) => onAddDate(-1)}>One</Button>
-          <Button onClick={(e) => onAddDate(1)}>Two</Button>
-        </ButtonGroup>
-
-        <Select
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          value={range}
-          label='Age'
-          onChange={(e) => onSetRange(e.target.value)}>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={10}>10</MenuItem>
-        </Select>
+      <div className='hdr'>
+        <div className='hdr_vtxt'>
+          Погода&nbsp;в
+          <br />
+          городе
+        </div>
+        <div className='hdr_left bb'>Ю</div>
+        <div className='right-wrp bb'>
+          <span className='hdr_right'>рга</span>
+          <div className='temp-wrp'>
+            <span className='temper'>-37.6</span>
+            <div className='bttn32 bttn-refr'></div>
+            {/* <img class="bttn32" src="refresh_1.svg"> */}
+          </div>
+        </div>
+        <div className='curr bl'>
+          Сейчас
+          <br />
+          В: 60%
+          <br />
+          Д: 748 мм
+        </div>
       </div>
-      <div className='wrpSvg'>
-        <SvgChart options={options} axis={axis} dataSets={dataSets} />
-        <Spinner msg={dataStatus} img='media/snowflake.svg#snowflake'></Spinner>
+      <div className='ctrls bl'>
+        <div className='ctrls-left-wrp'>
+          <button className='bttn32 ctrls-bttn-left' type='button'>
+            lb
+          </button>
+          <div className='lpan br bb'>
+            <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
+              <DatePicker
+                mask={'__.__.____'}
+                label='Basic example'
+                value={date}
+                onChange={(newVal) => onSetDate(newVal)}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </div>
+        </div>
+        <div className='ctrls-mid'>
+          <button className='bttn32 ' type='button'>
+            lb
+          </button>
+
+          <ButtonGroup variant='contained' aria-label='outlined primary button group'>
+            <Button onClick={(e) => onAddDate(-1)}>One</Button>
+            <Button onClick={(e) => onAddDate(1)}>Two</Button>
+          </ButtonGroup>
+          <Select
+            labelId='demo-simple-select-label'
+            id='demo-simple-select'
+            value={range}
+            label='Age'
+            onChange={(e) => onSetRange(e.target.value)}>
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={7}>7</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+          </Select>
+          <button className='bttn32 ' type='button'>
+            lb
+          </button>
+        </div>
+        <div className='ctrls-right-wrp'>
+          <button className='bttn32 bttn-right' type='button'>
+            rb
+          </button>
+          <div className='rpan'>
+            <div className='f1 bl'>
+              <div className='f1right'>
+                Сейчас
+                <br />
+                просматривают:
+                <br />
+                10 человек
+              </div>
+            </div>
+            <div className='f2 bl bb'>©LABvsUNI, 2022</div>
+          </div>
+        </div>
+      </div>
+      <div className='chart bl bb'>
+        <div className='wh100'>
+          <SvgChart options={options} axis={axis} dataSets={dataSets} />
+          <Spinner msg={dataStatus} img='media/snowflake.svg#snowflake'></Spinner>
+        </div>
       </div>
     </div>
   );

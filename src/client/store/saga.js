@@ -34,10 +34,7 @@ const rootReducer = combineReducers({
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const sagaMiddleware = createSagaMiddleware();
-const MyStore = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(sagaMiddleware))
-);
+const MyStore = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware)));
 
 function* fetchSensData(act) {
   // act = { date, count, func }
@@ -66,7 +63,9 @@ function* fetchSensData(act) {
     // yield put(setStatus(''));
     // yield put(setLoaded());
   } catch (e) {
-    // yield put(setStatus('Error'));
+    yield put(setStatus('Error'));
+    yield delay(500);
+    yield put(setStatus(''));
   }
 }
 

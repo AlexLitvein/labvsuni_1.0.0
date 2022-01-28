@@ -9,7 +9,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
-    // clean: true,
+    assetModuleFilename: 'media/[name][ext][query]',
+    clean: true,
   },
   resolve: {
     modules: [path.join(__dirname, 'src'), 'node_modules'],
@@ -41,22 +42,25 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|ico)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'media/[name].[ext]',
-            },
-          },
-          // {
-          //   loader: 'image-webpack-loader',
-          //   options: {
-          //     mozjpeg: {
-          //       progressive: true,
-          //     },
-          //   }
-          // },
-        ],
+        type: 'asset/resource',
+        // use: [
+        //   {
+        //     loader: 'file-loader',
+        //     options: {
+        //       // esModule: false,
+        //       name: '[name].[ext]',
+        //       outputPath: 'media',
+        //     },
+        //   },
+        //   // {
+        //   //   loader: 'image-webpack-loader',
+        //   //   options: {
+        //   //     mozjpeg: {
+        //   //       progressive: true,
+        //   //     },
+        //   //   }
+        //   // },
+        // ],
       },
     ],
   },

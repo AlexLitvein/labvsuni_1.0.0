@@ -1,19 +1,192 @@
+:root {
+  --main-color: #1d5395;
+  --brd-w: 8px;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+}
+
+.App {
+  display: flex;
+  flex-direction: column;  
+  height: 100vh;
+  color: var(--main-color);
+  background-color: chocolate;  
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
-  background-color: chocolate;
-  height: 100vh;
+.bl {
+  border-left: solid var(--brd-w);
+}
+.bb {
+  border-bottom: solid var(--brd-w);
+}
+.br {
+  border-right: solid var(--brd-w);
+}
+.bttn32 {
+  width: 32px;
+  height: 32px;
 }
 
-.wrpSvg {
-  background-color: rgb(223, 128, 128);
-  position: relative;  
-  height: 50%; 
+.wh100{
+  width: 100%;
+  height: 100%;
+}
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: var(--main-color);
+  font-family: Roboto;
+}
+
+.hdr {
+  display: flex;
+  font-family: Roboto;
+  font-size: 4em;
+  align-items: end;
+  background-color: #3bc3e3;
+  padding: 8px;
+}
+
+.hdr_vtxt {
+  transform: rotate(-90deg);
+  font-size: 1rem;
+  text-align: end;
+  margin-right: -1.3em;
+  margin-bottom: 0.9em;
+  margin-left: -1.5em;
+  line-height: 1em;
+}
+
+.right-wrp {
+  display: flex;
+  flex-grow: 1;
+  line-height: 0.8em;
+  justify-content: space-between;
+  margin-left: 0.2em;
+  margin-right: 8px;
+}
+.hdr_left {
+  line-height: 0.8em;
+  margin-left: -0.13em;
+  padding-left: 0.14em;
+}
+
+.hdr_right {
+  flex-grow: 1;
+  margin-left: -0.21em;
+}
+
+.temp-wrp {
+  display: flex;
+}
+
+.bttn-refr {
+  background-color: var(--main-color);
+  mask: url("media/refresh.svg") no-repeat;
+}
+.curr {
+  font-size: 0.9rem;
+  align-self: center;
+  height: 100%;
+  padding-left: 8px;
+}
+
+.ctrls {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  background-color: #278196;
+}
+
+.ctrls-left-wrp {
+}
+
+.lpan {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  height: 400px;
+  background-color: #00bfbf;
+  padding: 4px;
+}
+
+.rpan {
+  font-size: 0.62em;
+  display: none;
+  position: absolute;
+  right: 0;
+  flex-direction: column;
+  z-index: 10;
+  width: 200px;
+  height: 400px;
+}
+
+.ctrls-left-wrp:hover .lpan {
+  display: block;
+}
+
+.ctrls-mid {
+}
+.bttn-right {
+}
+
+.ctrls-right-wrp:hover .rpan {
+  display: flex;
+}
+
+.chart {
+  position: relative;
+  flex-grow: 1;
+  height: 100%;
+  background-color: #02a1c7;
+}
+
+.svg_chart {
+  background-color: #3a09090f;
+  mask: url("media/snowflake.svg") no-repeat;
+  mask-position: right -500px top -500px;
+  mask-size: 1000px;
+
+  /* background-image: url("snowflake.svg");
+  background-repeat: no-repeat;
+  background-size: 1000px;
+  background-position: right -500px top -500px; */
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  height: 10vh;
+  background-color: lightgreen;
+  font-size: 0.6em;
+}
+
+.f1 {
+  flex-grow: 1;
+  display: flex;
+  background-color: #00bfbf;
+  padding: 4px;
+  margin-left: 4px;
+}
+
+.f2 {
+  display: flex;
+  align-items: center;
+  background-color: #3bc3e3;
+  justify-content: end;
+  margin-left: 4px;
+  padding: 4px;
 }

@@ -6,7 +6,7 @@ import MyStore from './store/saga';
 import './styles/style.css';
 import App from './app.jsx';
 
-import './media/favicon.ico';
+import '../media/favicon.ico';
 
 // import reportWebVitals from './reportWebVitals';
 
