@@ -339,69 +339,71 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
   }, []); // componentDidMount()
 
   return (
-    <svg id='graph' className='chart1i0i0' ref={svgElm} width={sz.w} height={sz.h}>
-      {console.log('draw SvgChart')}
+    <div className='chart1i0i0'>
+      <svg id='graph' className='chart1i0i0-svg' ref={svgElm} width={sz.w} height={sz.h}>
+        {console.log('draw SvgChart')}
 
-      {/* {calcPadding()} */}
-      {/* {console.log('options.rcClient before', options.rcClient)} */}
+        {/* {calcPadding()} */}
+        {/* {console.log('options.rcClient before', options.rcClient)} */}
 
-      <path className='chart1i0i0-path' style={{ stroke: 'blue' }} d='M0 -10h10'>
-        <animate
-          id='ani_trigg'
-          ref={aniTrigEl}
-          begin='indefinite'
-          attributeName='d'
-          dur='0s'
-          to='M0 -10h20'
-          fill='freeze'
-        />
-      </path>
+        <path className='chart1i0i0-path' style={{ stroke: 'blue' }} d='M0 -10h10'>
+          <animate
+            id='ani_trigg'
+            ref={aniTrigEl}
+            begin='indefinite'
+            attributeName='d'
+            dur='0s'
+            to='M0 -10h20'
+            fill='freeze'
+          />
+        </path>
 
-      {/* <path className="path-data" style={{ stroke: 'blue' }} d="M0 10h10">
+        {/* <path className="path-data" style={{ stroke: 'blue' }} d="M0 10h10">
                 <animate id="ani-trigg" ref={aniTrigEl} begin="0s" attributeName="d" dur="1s" to="M0 10h200" fill="freeze" />
             </path> */}
 
-      {/* Для вычисления высоты и ширины текста */}
-      <text x={-100} y={-100} ref={txtRef}>
-        test
-      </text>
+        {/* Для вычисления высоты и ширины текста */}
+        <text x={-100} y={-100} ref={txtRef}>
+          test
+        </text>
 
-      {/* <rect x="10" y="10" width="20" height="20" stroke="black" fill="none">
+        {/* <rect x="10" y="10" width="20" height="20" stroke="black" fill="none">
                 <animate id="animation" attributeName="width" attributeType="XML" values="20;10;20" begin="0s" dur="3s" repeatDur="indefinite" end="ani_p.begin" />
             </rect> */}
 
-      {/* cls={'mrk-axis'} */}
+        {/* cls={'mrk-axis'} */}
 
-      <SvgMarker
-        id={'mrkVHAxis'}
-        cls='chart1i0i0-axis_marker'
-        w={2}
-        h={6}
-        refX={0}
-        refY={6}
-        mrkEl={<line x2='0' y2='6' />}
-      />
+        <SvgMarker
+          id={'mrkVHAxis'}
+          cls='chart1i0i0-axis_marker'
+          w={2}
+          h={6}
+          refX={0}
+          refY={6}
+          mrkEl={<line x2='0' y2='6' />}
+        />
 
-      {renderHTextAxis(options.rcClient)}
-      {renderVTextAxis(options.rcClient, '_id', dataSets)}
-      {/* {renderMarkers()} */}
-      {/* {renderPathAxis(options.rcClient, axis)} */}
+        {renderHTextAxis(options.rcClient)}
+        {renderVTextAxis(options.rcClient, '_id', dataSets)}
+        {/* {renderMarkers()} */}
+        {/* {renderPathAxis(options.rcClient, axis)} */}
 
-      <ChartAxis axis={axis} options={options} />
+        <ChartAxis axis={axis} options={options} />
 
-      {dataSets.map((itm, idx) => {
-        return renderDataSet(itm, idx);
-      })}
+        {dataSets.map((itm, idx) => {
+          return renderDataSet(itm, idx);
+        })}
 
-      {/* {console.log('renderedDataSet', renderedDataSet)} */}
-      {/* {renderDataSets} */}
-      {/* {renderedDataSet} */}
+        {/* {console.log('renderedDataSet', renderedDataSet)} */}
+        {/* {renderDataSets} */}
+        {/* {renderedDataSet} */}
 
-      <ChartCursor svgElm={svgElm} options={options} axis={axis} data={dataSets} />
+        <ChartCursor svgElm={svgElm} options={options} axis={axis} data={dataSets} />
 
-      {/* <Spinner status={status} bgnAniId={'ani-trigg'} endAniId={'ani_p'} options={options} /> */}
-      {/* {console.log('options.rcClient after', options.rcClient)} */}
-    </svg>
+        {/* <Spinner status={status} bgnAniId={'ani-trigg'} endAniId={'ani_p'} options={options} /> */}
+        {/* {console.log('options.rcClient after', options.rcClient)} */}
+      </svg>
+    </div>
   );
 };
 

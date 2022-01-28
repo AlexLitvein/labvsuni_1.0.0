@@ -18,7 +18,7 @@ body {
   flex-direction: column;  
   height: 100vh;
   color: var(--main-color);
-  background-color: chocolate;  
+  /* background-color: chocolate;   */
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -39,10 +39,11 @@ body {
   height: 32px;
 }
 
-.wh100{
+/* .chart-wrp{
+  position: relative;
   width: 100%;
   height: 100%;
-}
+} */
 .root {
   display: flex;
   flex-direction: column;
@@ -105,7 +106,7 @@ body {
 }
 
 .ctrls {
-  position: relative;
+  /* position: relative; */
   display: flex;
   justify-content: space-between;
   background-color: #278196;
@@ -118,6 +119,7 @@ body {
   display: none;
   position: absolute;
   z-index: 10;
+  width: 200px;
   height: 400px;
   background-color: #00bfbf;
   padding: 4px;

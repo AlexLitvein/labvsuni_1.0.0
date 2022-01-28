@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SvgChart from './components/SvgChart';
 import { getSensData, selDataSets } from './reducers/dbdata';
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -22,6 +23,7 @@ import Spinner from './components/Spinner/Spinner';
 import '../media/snowflake.svg';
 import '../media/refresh.svg';
 import { selStatus } from './reducers/status/sels';
+import { Box, FormControl, InputLabel } from '@mui/material';
 
 const axisCls = 'chart1i0i0-axis';
 const axis = {
@@ -73,6 +75,22 @@ const options = {
   // lnHSeg: 0,
   // lnVSeg: 0,
 };
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#4fc3f7',
+      contrastText: '#1d5395',
+    },
+    secondary: {
+      main: '#26c6da',
+      // contrastText: '#4d4d4d',
+    },
+    // text: {
+    //   primary: '#ff0000',
+    // },
+  },
+});
 
 function App() {
   const dispatch = useDispatch();
@@ -155,95 +173,93 @@ function App() {
   }, []); // componentDidMount()
 
   return (
-    <div className='App'>
-      <div className='hdr'>
-        <div className='hdr_vtxt'>
-          Погода&nbsp;в
-          <br />
-          городе
-        </div>
-        <div className='hdr_left bb'>Ю</div>
-        <div className='right-wrp bb'>
-          <span className='hdr_right'>рга</span>
-          <div className='temp-wrp'>
-            <span className='temper'>-37.6</span>
-            <div className='bttn32 bttn-refr'></div>
-            {/* <img class="bttn32" src="refresh_1.svg"> */}
+    <ThemeProvider theme={theme}>
+      <div className='App'>
+        <div className='hdr'>
+          <div className='hdr_vtxt'>
+            Погода&nbsp;в
+            <br />
+            городе
           </div>
-        </div>
-        <div className='curr bl'>
-          Сейчас
-          <br />
-          В: 60%
-          <br />
-          Д: 748 мм
-        </div>
-      </div>
-      <div className='ctrls bl'>
-        <div className='ctrls-left-wrp'>
-          <button className='bttn32 ctrls-bttn-left' type='button'>
-            lb
-          </button>
-          <div className='lpan br bb'>
-            <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
-              <DatePicker
-                mask={'__.__.____'}
-                label='Basic example'
-                value={date}
-                onChange={(newVal) => onSetDate(newVal)}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-          </div>
-        </div>
-        <div className='ctrls-mid'>
-          <button className='bttn32 ' type='button'>
-            lb
-          </button>
-
-          <ButtonGroup variant='contained' aria-label='outlined primary button group'>
-            <Button onClick={(e) => onAddDate(-1)}>One</Button>
-            <Button onClick={(e) => onAddDate(1)}>Two</Button>
-          </ButtonGroup>
-          <Select
-            labelId='demo-simple-select-label'
-            id='demo-simple-select'
-            value={range}
-            label='Age'
-            onChange={(e) => onSetRange(e.target.value)}>
-            <MenuItem value={1}>1</MenuItem>
-            <MenuItem value={7}>7</MenuItem>
-            <MenuItem value={10}>10</MenuItem>
-          </Select>
-          <button className='bttn32 ' type='button'>
-            lb
-          </button>
-        </div>
-        <div className='ctrls-right-wrp'>
-          <button className='bttn32 bttn-right' type='button'>
-            rb
-          </button>
-          <div className='rpan'>
-            <div className='f1 bl'>
-              <div className='f1right'>
-                Сейчас
-                <br />
-                просматривают:
-                <br />
-                10 человек
-              </div>
+          <div className='hdr_left bb'>Ю</div>
+          <div className='right-wrp bb'>
+            <span className='hdr_right'>рга</span>
+            <div className='temp-wrp'>
+              <span className='temper'>-37.6</span>
+              <div className='bttn32 bttn-refr'></div>
+              {/* <img class="bttn32" src="refresh_1.svg"> */}
             </div>
-            <div className='f2 bl bb'>©LABvsUNI, 2022</div>
+          </div>
+          <div className='curr bl'>
+            Сейчас
+            <br />
+            В: 60%
+            <br />
+            Д: 748 мм
           </div>
         </div>
-      </div>
-      <div className='chart bl bb'>
-        <div className='wh100'>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', backgroundColor: '#278196' }}>
+          <div className='ctrls-left-wrp'>
+            {/* <button className='bttn32 ctrls-bttn-left' type='button'>
+            lb
+          </button> */}
+            <Button variant='contained'>lb</Button>
+            <div className='lpan br bb'>
+              <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
+                <DatePicker
+                  mask={'__.__.____'}
+                  label='Basic example'
+                  value={date}
+                  onChange={(newVal) => onSetDate(newVal)}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            </div>
+          </div>
+          <div className='ctrls-mid'>
+            <ButtonGroup variant='contained' aria-label='outlined primary button group'>
+              <Button onClick={(e) => onAddDate(-1)}>One</Button>
+              <FormControl sx={{ width: 120 }}>
+                <InputLabel id='lab-range'>Период</InputLabel>
+                <Select labelId='lab-range' id='sel-range' value={range} onChange={(e) => onSetRange(e.target.value)}>
+                  <MenuItem value={1}>1 день</MenuItem>
+                  <MenuItem value={7}>7 дней</MenuItem>
+                  <MenuItem value={10}>10 дней</MenuItem>
+                </Select>
+              </FormControl>
+              <Button onClick={(e) => onAddDate(1)}>Two</Button>
+            </ButtonGroup>
+          </div>
+          <div className='ctrls-right-wrp'>
+            {/* <button className='bttn32 bttn-right' type='button'>
+            rb
+          </button> */}
+            <Button>rb</Button>
+            <div className='rpan'>
+              <div className='f1 bl'>
+                <div className='f1right'>
+                  Сейчас
+                  <br />
+                  просматривают:
+                  <br />
+                  10 человек
+                </div>
+              </div>
+              <div className='f2 bl bb'>©LABvsUNI, 2022</div>
+            </div>
+          </div>
+        </Box>
+        {/* <div className='ctrls bl'>
+          
+        </div> */}
+        <div className='chart bl bb'>
+          {/* <div className='chart-wrp'> */}
           <SvgChart options={options} axis={axis} dataSets={dataSets} />
           <Spinner msg={dataStatus} img='media/snowflake.svg#snowflake'></Spinner>
         </div>
+        {/* </div> */}
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

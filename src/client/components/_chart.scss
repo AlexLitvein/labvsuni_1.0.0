@@ -1,13 +1,19 @@
 .chart1i0i0 {
+
+  position: relative;
+  width: 100%;
+  height: 100%;
   /* родитель должен обязательно иметь привязку по высоте к чему-либо */
   /* border: 1px dashed black; */
   /* background-color: rgb(109, 255, 80); */
-  font-size: 14px;
-  position: absolute;
-  /* shape-rendering:geometricPrecision;     */
-  // box-sizing: border-box;
-  /* width: 100%; */
-  user-select: none;
+  &-svg{
+    font-size: 14px;
+    position: absolute;
+    /* shape-rendering:geometricPrecision;     */
+    // box-sizing: border-box;
+    /* width: 100%; */
+    user-select: none;
+  }  
 
   &-path {
     stroke-width: 2px;
