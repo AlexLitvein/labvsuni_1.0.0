@@ -23,7 +23,32 @@ import Spinner from './components/Spinner/Spinner';
 import '../media/snowflake.svg';
 import '../media/refresh.svg';
 import { selStatus } from './reducers/status/sels';
-import { Box, FormControl, InputLabel } from '@mui/material';
+import { Box, FormControl, IconButton, InputLabel } from '@mui/material';
+import { cyan, lightBlue } from '@mui/material/colors';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import SvgIcon from '@mui/material/SvgIcon';
+// import ArrowRight from './media/snowflake.svg#arrowright';
+// import { ReactComponent as ArrowRight } from './media/snowflake.svg#arrowright';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: lightBlue[300],
+      contrastText: '#1d5395',
+    },
+    secondary: {
+      main: cyan[400],
+      // contrastText: '#4d4d4d',
+    },
+    background: {
+      paper: lightBlue[200],
+    },
+    // text: {
+    //   primary: '#ff0000',
+    // },
+  },
+});
 
 const axisCls = 'chart1i0i0-axis';
 const axis = {
@@ -41,15 +66,15 @@ const axis = {
     max: 50,
     type: 'V',
     cls: axisCls,
-    clrPath: '#FF0000',
+    clrPath: '#b73838',
   },
   p: {
     name: 'Давление',
-    min: 0,
-    max: 1000,
+    min: 700,
+    max: 800,
     type: 'V',
     cls: axisCls,
-    clrPath: '#4F4FD9',
+    clrPath: '#fffb00',
   },
   h: {
     name: 'Влажность',
@@ -57,16 +82,16 @@ const axis = {
     max: 100,
     type: 'V',
     cls: axisCls,
-    clrPath: '#FFFA40',
+    clrPath: '#03fbfb',
   },
 };
 
 // options.[\w]* ?=
 const options = {
-  padding: { top: 20, right: 10, bottom: 60, left: 60 },
+  padding: { top: 20, right: 20, bottom: 60, left: 60 },
   // fontH: 10, //?
   countVLabels: 5,
-  axisTxtOffs: 4,
+  axisTxtOffs: 6,
   // fontBBoxHeight: 0,
   // biggestDataStrBBoxWidth: 0,
   // svgElm: null,
@@ -75,22 +100,6 @@ const options = {
   // lnHSeg: 0,
   // lnVSeg: 0,
 };
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4fc3f7',
-      contrastText: '#1d5395',
-    },
-    secondary: {
-      main: '#26c6da',
-      // contrastText: '#4d4d4d',
-    },
-    // text: {
-    //   primary: '#ff0000',
-    // },
-  },
-});
 
 function App() {
   const dispatch = useDispatch();
@@ -198,17 +207,31 @@ function App() {
             Д: 748 мм
           </div>
         </div>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', backgroundColor: '#278196' }}>
+        <Box
+          sx={{
+            borderLeft: 8,
+            py: 1,
+            display: 'flex',
+            justifyContent: 'space-between',
+            backgroundColor: 'primary.light',
+          }}>
           <div className='ctrls-left-wrp'>
             {/* <button className='bttn32 ctrls-bttn-left' type='button'>
             lb
           </button> */}
-            <Button variant='contained'>lb</Button>
+            {/* <Button variant='contained' sx={{ height: '100%', minWidth: 0 }}>
+              lb
+            </Button> */}
+            <Button variant='contained' sx={{ height: '100%' }}>
+              <SvgIcon viewBox='0 0 100 100'>
+                <use xlinkHref={'./media/snowflake.svg#calendar'}></use>
+              </SvgIcon>
+            </Button>
             <div className='lpan br bb'>
               <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
                 <DatePicker
                   mask={'__.__.____'}
-                  label='Basic example'
+                  label='Выберите дату'
                   value={date}
                   onChange={(newVal) => onSetDate(newVal)}
                   renderInput={(params) => <TextField {...params} />}
@@ -216,36 +239,65 @@ function App() {
               </LocalizationProvider>
             </div>
           </div>
-          <div className='ctrls-mid'>
-            <ButtonGroup variant='contained' aria-label='outlined primary button group'>
-              <Button onClick={(e) => onAddDate(-1)}>One</Button>
-              <FormControl sx={{ width: 120 }}>
-                <InputLabel id='lab-range'>Период</InputLabel>
-                <Select labelId='lab-range' id='sel-range' value={range} onChange={(e) => onSetRange(e.target.value)}>
-                  <MenuItem value={1}>1 день</MenuItem>
-                  <MenuItem value={7}>7 дней</MenuItem>
-                  <MenuItem value={10}>10 дней</MenuItem>
-                </Select>
-              </FormControl>
-              <Button onClick={(e) => onAddDate(1)}>Two</Button>
-            </ButtonGroup>
-          </div>
+          {/* <div className='ctrls-mid'> */}
+          <ButtonGroup variant='contained' aria-label='outlined primary button group'>
+            {/* <Button onClick={(e) => onAddDate(-1)}>&lt;&lt;</Button> */}
+            {/* <IconButton shape={'square'} aria-label='delete'>
+              <DeleteIcon />
+            </IconButton> */}
+            <Button onClick={(e) => onAddDate(-1)}>
+              <SvgIcon viewBox='0 0 100 100'>
+                <use xlinkHref={'./media/snowflake.svg#arrowright'} transform='scale(-1 1) translate(-100 0)'></use>
+              </SvgIcon>
+            </Button>
+            <FormControl size='small' sx={{ width: 120 }}>
+              <InputLabel id='lab-range'>Период</InputLabel>
+              <Select
+                labelId='lab-range'
+                label='Период'
+                id='sel-range'
+                value={range}
+                onChange={(e) => onSetRange(e.target.value)}>
+                <MenuItem value={1}>1 день</MenuItem>
+                <MenuItem value={7}>7 дней</MenuItem>
+                <MenuItem value={10}>10 дней</MenuItem>
+              </Select>
+            </FormControl>
+            {/* <Button onClick={(e) => onAddDate(1)}>&gt;&gt;</Button> */}
+            <Button onClick={(e) => onAddDate(1)}>
+              <SvgIcon viewBox='0 0 100 100'>
+                <use xlinkHref={'./media/snowflake.svg#arrowright'}></use>
+              </SvgIcon>
+            </Button>
+          </ButtonGroup>
+          {/* </div> */}
           <div className='ctrls-right-wrp'>
             {/* <button className='bttn32 bttn-right' type='button'>
             rb
           </button> */}
-            <Button>rb</Button>
-            <div className='rpan'>
-              <div className='f1 bl'>
+            {/* <Button variant='contained' sx={{ height: '100%' }}>
+              i
+            </Button> */}
+            <Button variant='contained' sx={{ height: '100%' }}>
+              <SvgIcon viewBox='0 0 100 100'>
+                <use xlinkHref={'./media/snowflake.svg#info'}></use>
+              </SvgIcon>
+            </Button>
+            <div className='lpan rpan bl bb'>
+              <div className='f1'>
                 <div className='f1right'>
                   Сейчас
                   <br />
                   просматривают:
+                  <br />? человек
+                  <hr></hr>
+                  Посещений
                   <br />
-                  10 человек
+                  за сегодня:
+                  <br />?
                 </div>
               </div>
-              <div className='f2 bl bb'>©LABvsUNI, 2022</div>
+              <div className='f2'>©LABvsUNI, 2022</div>
             </div>
           </div>
         </Box>

@@ -50,7 +50,7 @@ export function ChartCursor({ svgElm, options, axis, data }) {
           ('0' + (res.getMonth() + 1)).slice(-2) +
           '/' +
           (res.getFullYear() % 100) +
-          ' ' +
+          '-' +
           ('0' + res.getHours()).slice(-2) +
           ':' +
           ('0' + res.getMinutes()).slice(-2);

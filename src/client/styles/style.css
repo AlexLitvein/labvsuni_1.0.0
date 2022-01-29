@@ -1,5 +1,6 @@
 :root {
   --main-color: #1d5395;
+  --bkg-color: #3bc3e3;
   --brd-w: 8px;
 }
 
@@ -23,6 +24,10 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+hr{
+  color: lightskyblue;
 }
 
 .bl {
@@ -57,7 +62,7 @@ body {
   font-family: Roboto;
   font-size: 4em;
   align-items: end;
-  background-color: #3bc3e3;
+  background-color: var(--bkg-color);
   padding: 8px;
 }
 
@@ -121,19 +126,38 @@ body {
   z-index: 10;
   width: 200px;
   height: 400px;
-  background-color: #00bfbf;
-  padding: 4px;
+  background-color: #3bc3e3;
+  padding: 6px;
 }
 
 .rpan {
-  font-size: 0.62em;
-  display: none;
+  
+  /* display: none;
   position: absolute;
-  right: 0;
-  flex-direction: column;
   z-index: 10;
   width: 200px;
-  height: 400px;
+  height: 400px; */
+
+  font-size: 0.62em;
+  right: 0;
+  flex-direction: column;  
+}
+
+.f1 {
+  flex-grow: 1;
+  /* display: flex; */
+  /* background-color: #00bfbf; */
+  /* padding: 4px; */
+  /* margin-left: 4px; */
+}
+
+.f2 {
+  display: flex;
+  align-items: center;
+  background-color: #309cb4;
+  justify-content: end;
+  /* margin-left: 4px; */
+  /* padding: 4px; */
 }
 
 .ctrls-left-wrp:hover .lpan {
@@ -176,19 +200,4 @@ body {
   font-size: 0.6em;
 }
 
-.f1 {
-  flex-grow: 1;
-  display: flex;
-  background-color: #00bfbf;
-  padding: 4px;
-  margin-left: 4px;
-}
 
-.f2 {
-  display: flex;
-  align-items: center;
-  background-color: #3bc3e3;
-  justify-content: end;
-  margin-left: 4px;
-  padding: 4px;
-}

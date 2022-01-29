@@ -176,6 +176,8 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
       '/' +
       ('0' + (data.getMonth() + 1)).slice(-2) +
       '/' +
+      (data.getFullYear() % 100) +
+      '-' +
       ('0' + data.getHours()).slice(-2) +
       ':00';
     return dataStr;

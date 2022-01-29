@@ -40,6 +40,10 @@ module.exports = {
           'sass-loader', // Compiles Sass to CSS
         ],
       },
+      // {
+      //   test: /\.svg$/,
+      //   use: ['@svgr/webpack'],
+      // },
       {
         test: /\.(png|jpe?g|gif|svg|ico)$/i,
         type: 'asset/resource',
