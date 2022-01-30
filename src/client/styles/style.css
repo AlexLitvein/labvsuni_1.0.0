@@ -16,7 +16,7 @@ body {
 
 .App {
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   height: 100vh;
   color: var(--main-color);
   /* background-color: chocolate;   */
@@ -26,7 +26,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-hr{
+hr {
   color: lightskyblue;
 }
 
@@ -40,8 +40,8 @@ hr{
   border-right: solid var(--brd-w);
 }
 .bttn32 {
-  width: 32px;
-  height: 32px;
+  width: 32px !important;
+  height: 32px !important;
 }
 
 /* .chart-wrp{
@@ -100,9 +100,16 @@ hr{
 }
 
 .bttn-refr {
-  background-color: var(--main-color);
-  mask: url("media/refresh.svg") no-repeat;
+  display: flex;
+  /* background-color: var(--main-color); */
+  /* mask: url("media/refresh.svg") no-repeat; */
+  /* mask: url("media/snowflake.svg#refresh") no-repeat; */
+  transition-duration: 1s;
+  transform: rotate(0deg);
 }
+/* .rot360 {
+  transform: rotate(360deg);
+} */
 .curr {
   font-size: 0.9rem;
   align-self: center;
@@ -131,7 +138,6 @@ hr{
 }
 
 .rpan {
-  
   /* display: none;
   position: absolute;
   z-index: 10;
@@ -140,7 +146,7 @@ hr{
 
   font-size: 0.62em;
   right: 0;
-  flex-direction: column;  
+  flex-direction: column;
 }
 
 .f1 {
@@ -199,5 +205,3 @@ hr{
   background-color: lightgreen;
   font-size: 0.6em;
 }
-
-

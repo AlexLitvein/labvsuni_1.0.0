@@ -376,13 +376,23 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
         {/* cls={'mrk-axis'} */}
 
         <SvgMarker
-          id={'mrkVHAxis'}
-          cls='chart1i0i0-axis_marker'
+          id={'mrkHAxis'}
+          cls='chart1i0i0-axis_hmarker'
           w={2}
           h={6}
           refX={0}
           refY={6}
           mrkEl={<line x2='0' y2='6' />}
+        />
+
+        <SvgMarker
+          id={'mrkVAxis'}
+          cls='chart1i0i0-axis_vmarker'
+          w={2}
+          h={options.rcClient.right - options.rcClient.left}
+          refX={0}
+          refY={options.rcClient.right - options.rcClient.left}
+          mrkEl={<line x2='0' y2={options.rcClient.right - options.rcClient.left} />}
         />
 
         {renderHTextAxis(options.rcClient)}

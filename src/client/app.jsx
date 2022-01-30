@@ -21,11 +21,11 @@ import Spinner from './components/Spinner/Spinner';
 // import {DatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 // import AdapterDateFns from '@date-io/date-fns';
 import '../media/snowflake.svg';
-import '../media/refresh.svg';
+// import '../media/refresh.svg';
 import { selStatus } from './reducers/status/sels';
 import { Box, FormControl, IconButton, InputLabel } from '@mui/material';
 import { cyan, lightBlue } from '@mui/material/colors';
-import DeleteIcon from '@mui/icons-material/Delete';
+// import DeleteIcon from '@mui/icons-material/Delete';
 
 import SvgIcon from '@mui/material/SvgIcon';
 // import ArrowRight from './media/snowflake.svg#arrowright';
@@ -50,14 +50,14 @@ const theme = createTheme({
   },
 });
 
-const axisCls = 'chart1i0i0-axis';
+// const axisCls = 'chart1i0i0-axis';
 const axis = {
   _id: {
     name: 'Дата',
     min: 0,
     max: 0,
     type: 'H',
-    cls: axisCls,
+    cls: 'chart1i0i0-axis chart1i0i0-axis-horz',
     clrPath: '#000ff00',
   },
   t: {
@@ -65,7 +65,7 @@ const axis = {
     min: -50,
     max: 50,
     type: 'V',
-    cls: axisCls,
+    cls: 'chart1i0i0-axis chart1i0i0-axis-vert',
     clrPath: '#b73838',
   },
   p: {
@@ -73,7 +73,7 @@ const axis = {
     min: 700,
     max: 800,
     type: 'V',
-    cls: axisCls,
+    cls: 'chart1i0i0-axis chart1i0i0-axis-vert',
     clrPath: '#fffb00',
   },
   h: {
@@ -81,7 +81,7 @@ const axis = {
     min: 0,
     max: 100,
     type: 'V',
-    cls: axisCls,
+    cls: 'chart1i0i0-axis chart1i0i0-axis-vert',
     clrPath: '#03fbfb',
   },
 };
@@ -168,6 +168,15 @@ function App() {
     fetchData(date, range);
   };
 
+  const rotate = () => {
+    let a = 0;
+    return (e) => {
+      console.log('rot');
+      // e.target.style.transform = `rotate(${(a -= 360)}deg)`;
+      e.currentTarget.style.transform = `rotate(${(a -= 360)}deg)`;
+    };
+  };
+
   const onAddDate = (add) => {
     setDate((prev) => {
       const res = addDateDay(prev, add);
@@ -195,7 +204,16 @@ function App() {
             <span className='hdr_right'>рга</span>
             <div className='temp-wrp'>
               <span className='temper'>-37.6</span>
-              <div className='bttn32 bttn-refr'></div>
+              <div className='bttn32 bttn-refr' onClick={rotate()}>
+                <SvgIcon className='bttn32' viewBox='0 0 100 100'>
+                  <use xlinkHref={'./media/snowflake.svg#refresh'}></use>
+                </SvgIcon>
+              </div>
+              {/* <IconButton className='bttn-refr' onClick={rotate()}>
+                <SvgIcon viewBox='0 0 100 100'>
+                  <use xlinkHref={'./media/snowflake.svg#refresh'}></use>
+                </SvgIcon>
+              </IconButton> */}
               {/* <img class="bttn32" src="refresh_1.svg"> */}
             </div>
           </div>
