@@ -97,36 +97,6 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
     return stride || 1;
   };
 
-  // const calcPadding = () => {
-  //   let left = 0;
-  //   let bottom = 0;
-  //   let tmpSz = 0;
-  //   let topAcc = 0;
-
-  //   if (dataSets.length !== 0) {
-  //     let dataObj = dataSets[0];
-  //     for (const key in axis) {
-  //       const el = axis[key]; //_id: { name: 'Дата', min: 0, max: 0, type: 'H', cls: 'axis', clrPath: '#000ff00' },
-  //       // горизонтальная ось
-  //       if (el.type === 'H') {
-  //         bottom = options.getStrBoundSize(_formatDateStr(dataObj[key][0])).width;
-  //       } else {
-  //         // вертикальная ось
-  //         tmpSz = options.getStrBoundSize(el.max);
-  //         left = tmpSz.width > left ? tmpSz.width : left;
-  //         topAcc += tmpSz.height;
-  //       }
-  //     }
-  //     tmpSz = topAcc / 2 + options.axisTxtOffs * 2;
-  //     options.padding.top = options.padding.top < tmpSz ? tmpSz : options.padding.top;
-  //     tmpSz = left + options.axisTxtOffs * 2;
-  //     options.padding.left = options.padding.left < tmpSz ? tmpSz : options.padding.left;
-  //     tmpSz = bottom + options.axisTxtOffs * 2;
-  //     options.padding.bottom = options.padding.bottom < tmpSz ? tmpSz : options.padding.bottom;
-  //   }
-  //   // console.log(`szHText ${szHText} szVText ${szVText}`);
-  // };
-
   const calcPadding = (hAxleLabelPattern) => {
     let left = 0;
     let bottom = 0;
@@ -288,7 +258,7 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
   //      h:   [12.5 ...]
   // }
   const renderDataSet = (obj, idx) => {
-    console.log('renderDataSet');
+    // console.log('renderDataSet');
     const out = [];
     for (const key in obj) {
       const el = obj[key]; // [21.2, ...]
@@ -329,7 +299,7 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
   }, [dataSets]);
 
   useEffect(() => {
-    console.log('SvgChart useEffect componentDidMount()');
+    // console.log('SvgChart useEffect componentDidMount()');
     resize();
 
     calcPadding('01/01/2000');
@@ -345,9 +315,6 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
       <svg id='graph' className='chart1i0i0-svg' ref={svgElm} width={sz.w} height={sz.h}>
         {console.log('draw SvgChart')}
 
-        {/* {calcPadding()} */}
-        {/* {console.log('options.rcClient before', options.rcClient)} */}
-
         <path className='chart1i0i0-path' style={{ stroke: 'blue' }} d='M0 -10h10'>
           <animate
             id='ani_trigg'
@@ -360,20 +327,10 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
           />
         </path>
 
-        {/* <path className="path-data" style={{ stroke: 'blue' }} d="M0 10h10">
-                <animate id="ani-trigg" ref={aniTrigEl} begin="0s" attributeName="d" dur="1s" to="M0 10h200" fill="freeze" />
-            </path> */}
-
         {/* Для вычисления высоты и ширины текста */}
         <text x={-100} y={-100} ref={txtRef}>
           test
         </text>
-
-        {/* <rect x="10" y="10" width="20" height="20" stroke="black" fill="none">
-                <animate id="animation" attributeName="width" attributeType="XML" values="20;10;20" begin="0s" dur="3s" repeatDur="indefinite" end="ani_p.begin" />
-            </rect> */}
-
-        {/* cls={'mrk-axis'} */}
 
         <SvgMarker
           id={'mrkHAxis'}
@@ -397,8 +354,6 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
 
         {renderHTextAxis(options.rcClient)}
         {renderVTextAxis(options.rcClient, '_id', dataSets)}
-        {/* {renderMarkers()} */}
-        {/* {renderPathAxis(options.rcClient, axis)} */}
 
         <ChartAxis axis={axis} options={options} />
 
@@ -406,14 +361,7 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
           return renderDataSet(itm, idx);
         })}
 
-        {/* {console.log('renderedDataSet', renderedDataSet)} */}
-        {/* {renderDataSets} */}
-        {/* {renderedDataSet} */}
-
         <ChartCursor svgElm={svgElm} options={options} axis={axis} data={dataSets} />
-
-        {/* <Spinner status={status} bgnAniId={'ani-trigg'} endAniId={'ani_p'} options={options} /> */}
-        {/* {console.log('options.rcClient after', options.rcClient)} */}
       </svg>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 export function ChartCursor({ svgElm, options, axis, data }) {
-  console.log('Call ChartCursor');
+  // console.log('Call ChartCursor');
 
   options.noteW = 0;
   options.noteH = options.axisTxtOffs;
@@ -75,13 +75,13 @@ export function ChartCursor({ svgElm, options, axis, data }) {
 
   useEffect(() => {
     svgElm.current.addEventListener('click', (e) => {
-      console.log('click');
+      // console.log('click');
       setPos(testPos(e.offsetX, e.offsetY));
     });
 
     svgElm.current.addEventListener('mousemove', (e) => {
       if (e.buttons === 1) {
-        console.log('mousemove');
+        // console.log('mousemove');
         setPos(testPos(e.offsetX, e.offsetY));
       }
     });
@@ -89,8 +89,6 @@ export function ChartCursor({ svgElm, options, axis, data }) {
 
   return (
     <>
-      {console.log('draw ChartCursor')}
-
       <path d={`M${pos.x} ${options.rcClient.top}V${options.rcClient.bottom}`} className='chart1i0i0-cursor'></path>
       <FlyNote x={pos.x} y={pos.y} options={options} arrStr={getVal(pos.x, pos.y, 0)} />
     </>

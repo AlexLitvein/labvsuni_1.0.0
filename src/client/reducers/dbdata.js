@@ -8,7 +8,7 @@ export const setDataSet = (payload) => {
 };
 
 export const getSensData = (payload) => {
-  console.log('act getSensData');
+  // console.log('act getSensData');
   return {
     type: GET_SENS_DATA,
     payload,

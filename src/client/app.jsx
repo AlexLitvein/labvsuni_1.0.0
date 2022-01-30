@@ -106,8 +106,8 @@ function App() {
   const dataSets = useSelector(selDataSets);
   const dataStatus = useSelector(selStatus);
 
-  // const [date, setDate] = useState(new Date(Date.now()));
-  const [date, setDate] = useState(new Date('2021-11-01'));
+  const [date, setDate] = useState(new Date(Date.now()));
+  // const [date, setDate] = useState(new Date('2021-11-01'));
   const [range, setRange] = useState(1);
   // const [spinAct, setSpinAct] = useState('');
 
@@ -171,8 +171,7 @@ function App() {
   const rotate = () => {
     let a = 0;
     return (e) => {
-      console.log('rot');
-      // e.target.style.transform = `rotate(${(a -= 360)}deg)`;
+      // console.log('rot');
       e.currentTarget.style.transform = `rotate(${(a -= 360)}deg)`;
     };
   };
@@ -186,7 +185,7 @@ function App() {
   };
 
   useEffect(() => {
-    console.log('App useEffect componentDidMount() fetchData');
+    // console.log('App useEffect componentDidMount() fetchData');
     fetchData(date, range);
   }, []); // componentDidMount()
 
@@ -209,12 +208,6 @@ function App() {
                   <use xlinkHref={'./media/snowflake.svg#refresh'}></use>
                 </SvgIcon>
               </div>
-              {/* <IconButton className='bttn-refr' onClick={rotate()}>
-                <SvgIcon viewBox='0 0 100 100'>
-                  <use xlinkHref={'./media/snowflake.svg#refresh'}></use>
-                </SvgIcon>
-              </IconButton> */}
-              {/* <img class="bttn32" src="refresh_1.svg"> */}
             </div>
           </div>
           <div className='curr bl'>
@@ -234,18 +227,12 @@ function App() {
             backgroundColor: 'primary.light',
           }}>
           <div className='ctrls-left-wrp'>
-            {/* <button className='bttn32 ctrls-bttn-left' type='button'>
-            lb
-          </button> */}
-            {/* <Button variant='contained' sx={{ height: '100%', minWidth: 0 }}>
-              lb
-            </Button> */}
             <Button variant='contained' sx={{ height: '100%' }}>
               <SvgIcon viewBox='0 0 100 100'>
                 <use xlinkHref={'./media/snowflake.svg#calendar'}></use>
               </SvgIcon>
             </Button>
-            <div className='lpan br bb'>
+            <div className='lpan bt bb'>
               <LocalizationProvider dateAdapter={AdapterDateFns} locale={ruLocale}>
                 <DatePicker
                   mask={'__.__.____'}
@@ -257,12 +244,7 @@ function App() {
               </LocalizationProvider>
             </div>
           </div>
-          {/* <div className='ctrls-mid'> */}
           <ButtonGroup variant='contained' aria-label='outlined primary button group'>
-            {/* <Button onClick={(e) => onAddDate(-1)}>&lt;&lt;</Button> */}
-            {/* <IconButton shape={'square'} aria-label='delete'>
-              <DeleteIcon />
-            </IconButton> */}
             <Button onClick={(e) => onAddDate(-1)}>
               <SvgIcon viewBox='0 0 100 100'>
                 <use xlinkHref={'./media/snowflake.svg#arrowright'} transform='scale(-1 1) translate(-100 0)'></use>
@@ -281,27 +263,19 @@ function App() {
                 <MenuItem value={10}>10 дней</MenuItem>
               </Select>
             </FormControl>
-            {/* <Button onClick={(e) => onAddDate(1)}>&gt;&gt;</Button> */}
             <Button onClick={(e) => onAddDate(1)}>
               <SvgIcon viewBox='0 0 100 100'>
                 <use xlinkHref={'./media/snowflake.svg#arrowright'}></use>
               </SvgIcon>
             </Button>
           </ButtonGroup>
-          {/* </div> */}
           <div className='ctrls-right-wrp'>
-            {/* <button className='bttn32 bttn-right' type='button'>
-            rb
-          </button> */}
-            {/* <Button variant='contained' sx={{ height: '100%' }}>
-              i
-            </Button> */}
             <Button variant='contained' sx={{ height: '100%' }}>
               <SvgIcon viewBox='0 0 100 100'>
                 <use xlinkHref={'./media/snowflake.svg#info'}></use>
               </SvgIcon>
             </Button>
-            <div className='lpan rpan bl bb'>
+            <div className='lpan rpan bt bb br'>
               <div className='f1'>
                 <div className='f1right'>
                   Сейчас
@@ -319,9 +293,6 @@ function App() {
             </div>
           </div>
         </Box>
-        {/* <div className='ctrls bl'>
-          
-        </div> */}
         <div className='chart bl bb'>
           {/* <div className='chart-wrp'> */}
           <SvgChart options={options} axis={axis} dataSets={dataSets} />

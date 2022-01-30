@@ -70,7 +70,7 @@ function* fetchSensData(act) {
 }
 
 function* sagaWatcher() {
-  console.log('sagaWatcher');
+  // console.log('sagaWatcher');
   yield takeLatest(GET_SENS_DATA, fetchSensData);
   // yield takeLatest(GET_SENS_DATA, fetchSensData);
 }

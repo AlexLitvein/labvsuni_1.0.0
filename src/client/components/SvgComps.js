@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
 export const AniPath = ({ id, options, axle, data }) => {
-  console.log('AniPath');
+  // console.log('AniPath');
 
   const [td, setTD] = useState({ t: '', d: '', data: [] });
 
@@ -21,7 +21,7 @@ export const AniPath = ({ id, options, axle, data }) => {
   };
 
   useEffect(() => {
-    console.log(`AniPath useEffect `);
+    // console.log(`AniPath useEffect `);
 
     setTD((prev) => {
       // console.log('prev', prev);
