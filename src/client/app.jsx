@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import { Provider, useDispatch, useSelector } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
 import SvgChart from './components/SvgChart';
-import { getSensData, selDataSets } from './reducers/dbdata';
+import { getSensData, selCurrSensData, selDataSets } from './reducers/dbdata';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
@@ -28,6 +28,7 @@ import { cyan, lightBlue } from '@mui/material/colors';
 // import DeleteIcon from '@mui/icons-material/Delete';
 
 import SvgIcon from '@mui/material/SvgIcon';
+import CurrSensData from './components/CurrSensData';
 // import ArrowRight from './media/snowflake.svg#arrowright';
 // import { ReactComponent as ArrowRight } from './media/snowflake.svg#arrowright';
 
@@ -88,10 +89,10 @@ const axis = {
 
 // options.[\w]* ?=
 const options = {
-  padding: { top: 20, right: 20, bottom: 60, left: 60 },
+  padding: { left: 20, top: 20, right: 20, bottom: 60 },
   // fontH: 10, //?
   countVLabels: 5,
-  axisTxtOffs: 6,
+  axisTxtOffs: 8,
   // fontBBoxHeight: 0,
   // biggestDataStrBBoxWidth: 0,
   // svgElm: null,
@@ -104,6 +105,7 @@ const options = {
 function App() {
   const dispatch = useDispatch();
   const dataSets = useSelector(selDataSets);
+  const currSensData = useSelector(selCurrSensData);
   const dataStatus = useSelector(selStatus);
 
   const [date, setDate] = useState(new Date(Date.now()));
@@ -168,13 +170,13 @@ function App() {
     fetchData(date, range);
   };
 
-  const rotate = () => {
-    let a = 0;
-    return (e) => {
-      // console.log('rot');
-      e.currentTarget.style.transform = `rotate(${(a -= 360)}deg)`;
-    };
-  };
+  // const rotate = () => {
+  //   let a = 0;
+  //   return (e) => {
+  //     // console.log('rot');
+  //     e.currentTarget.style.transform = `rotate(${(a -= 360)}deg)`;
+  //   };
+  // };
 
   const onAddDate = (add) => {
     setDate((prev) => {
@@ -199,24 +201,10 @@ function App() {
             городе
           </div>
           <div className='hdr_left bb'>Ю</div>
-          <div className='right-wrp bb'>
+          <div className='middle-wrp bb'>
             <span className='hdr_right'>рга</span>
-            <div className='temp-wrp'>
-              <span className='temper'>-37.6</span>
-              <div className='bttn32 bttn-refr' onClick={rotate()}>
-                <SvgIcon className='bttn32' viewBox='0 0 100 100'>
-                  <use xlinkHref={'./media/snowflake.svg#refresh'}></use>
-                </SvgIcon>
-              </div>
-            </div>
           </div>
-          <div className='curr bl'>
-            Сейчас
-            <br />
-            В: 60%
-            <br />
-            Д: 748 мм
-          </div>
+          <CurrSensData currSensData={currSensData} fetchDataFu={fetchData}></CurrSensData>
         </div>
         <Box
           sx={{
@@ -245,7 +233,7 @@ function App() {
             </div>
           </div>
           <ButtonGroup variant='contained' aria-label='outlined primary button group'>
-            <Button onClick={(e) => onAddDate(-1)}>
+            <Button onClick={(e) => onAddDate(-range)}>
               <SvgIcon viewBox='0 0 100 100'>
                 <use xlinkHref={'./media/snowflake.svg#arrowright'} transform='scale(-1 1) translate(-100 0)'></use>
               </SvgIcon>
@@ -260,10 +248,10 @@ function App() {
                 onChange={(e) => onSetRange(e.target.value)}>
                 <MenuItem value={1}>1 день</MenuItem>
                 <MenuItem value={7}>7 дней</MenuItem>
-                <MenuItem value={10}>10 дней</MenuItem>
+                <MenuItem value={30}>30 дней</MenuItem>
               </Select>
             </FormControl>
-            <Button onClick={(e) => onAddDate(1)}>
+            <Button onClick={(e) => onAddDate(range)}>
               <SvgIcon viewBox='0 0 100 100'>
                 <use xlinkHref={'./media/snowflake.svg#arrowright'}></use>
               </SvgIcon>

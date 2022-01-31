@@ -1,43 +1,20 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-// import { useSelector } from "react-redux";
-// import { selStatus } from "../rdcrs/status/sels";
-// import { selStatus } from "../rdcr/status/sels"; // , STATUS
+import React, { useState, useEffect, useRef } from 'react';
 import { ChartCursor } from './ChartCursor';
-// import Spinner from "./Spinner";
 import { AniPath, ChartAxis, SvgMarker } from './SvgComps';
 import { TextGroup } from './SvgTextGroup';
 import './_chart.scss';
 
 const SvgChart = ({ options, axis, dataSets = [] }) => {
-  console.log('call SvgChart'); // , dataSets
-
-  //   let options = options;
-
+  // console.log('call SvgChart'); // , dataSets
   const svgElm = useRef(null);
   const txtRef = useRef(null);
   const aniTrigEl = useRef(null);
-
-  // const status = useSelector(selStatus);
-
-  // let { width, height } = svgElm.current?.parentElement.getBoundingClientRect();
-  // const [sz, setSize] = useState({ width, height });
   const [sz, setSize] = useState({ w: 480, h: 320 });
 
   // WARNING: для ортогональных линий, ширину использовать кратную 2 пикселям, координаты целочисоенные
   //   options.cut = (n) => Math.trunc(n); // лучше отсекать, чем округлять, иначе сумма сегментов иногда будет больше отрезка в который они должны уложиться
   // умножение на 0.1 вместо деления на 10, порождает много цифр после запятой
   options.cut = (n) => Math.trunc(n * 10) / 10; // * 0.1
-
-  // options.cut = (n) => Math.round(n);
-
-  // const cut = (n) => Math.ceil(n);
-  // const cut = (n) => (Math.trunc(n * 10)) / 10;
-  // const cut = (n) => {
-  //     let t=Math.trunc(n * 10);
-  //     let res=t /10;
-  //     return res;
-  //     // return Math.trunc(n * 10) * 0.1;
-  // }
 
   const _clientRect = () => {
     // oreder!
@@ -54,18 +31,6 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
   options.lnHSeg = options.cut((sz.w - options.padding.left - options.padding.right) / options.numHSeg);
   options.lnVSeg = options.cut((sz.h - options.padding.top - options.padding.bottom) / options.numVSeg);
   options.rcClient = _clientRect();
-
-  // options.getOrthoLine = (x, y, size, numSeg, type) => {
-  //     let d = `M${cut(x)} ${cut(y)}`;
-  //     let pos = type === 'H' ? x : y;
-  //     // let lnSeg = size / numSeg;
-  //     let lnSeg = type === 'H' ? options.lnHSeg : options.lnVSeg;
-  //     for (let i = 1; i <= numSeg; i++) {
-  //         // d += type + cut(pos + lnSeg * i);
-  //         d += type + (pos + lnSeg * i);
-  //     }
-  //     return d;
-  // }
 
   options.getOrthoPath = (x, y, size, numSeg, type) => {
     let d = 'M';
@@ -103,8 +68,6 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
     let tmpSz = 0;
     let topAcc = 0;
 
-    // if (dataSets.length !== 0) {
-    // let dataObj = dataSets[0];
     for (const key in axis) {
       const el = axis[key]; //_id: { name: 'Дата', min: 0, max: 0, type: 'H', cls: 'axis', clrPath: '#000ff00' },
       // горизонтальная ось
@@ -123,8 +86,6 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
     options.padding.left = options.padding.left < tmpSz ? tmpSz : options.padding.left;
     tmpSz = bottom + options.axisTxtOffs * 2;
     options.padding.bottom = options.padding.bottom < tmpSz ? tmpSz : options.padding.bottom;
-    // }
-    // console.log(`szHText ${szHText} szVText ${szVText}`);
   };
 
   options.getStrBoundSize = (str, cls) => {
@@ -302,7 +263,7 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
     // console.log('SvgChart useEffect componentDidMount()');
     resize();
 
-    calcPadding('01/01/2000');
+    calcPadding('01/01/22-00:00');
 
     window.addEventListener('resize', (e) => {
       resize();
@@ -313,7 +274,7 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
   return (
     <div className='chart1i0i0'>
       <svg id='graph' className='chart1i0i0-svg' ref={svgElm} width={sz.w} height={sz.h}>
-        {console.log('draw SvgChart')}
+        {/* {console.log('draw SvgChart')} */}
 
         <path className='chart1i0i0-path' style={{ stroke: 'blue' }} d='M0 -10h10'>
           <animate
