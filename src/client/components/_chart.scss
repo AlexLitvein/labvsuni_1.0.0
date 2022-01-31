@@ -47,16 +47,15 @@
 
   &-cursor {
     fill: none;
-    stroke: #4fc3f7;
+    stroke: #1d5395;
     stroke-width: 2px;
     stroke-dasharray: 2, 4;
   }
 
   &-note {
-    fill: var(--bkg-color);
+    fill: var(--bkg-dark);
     stroke: #1d5395;
     stroke-width: 2px;
-    /* stroke-dasharray: 4, 4; */
     stroke-linejoin: round;
 
     &_text {

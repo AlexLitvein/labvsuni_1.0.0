@@ -57,7 +57,7 @@ export const AniPath = ({ id, options, axle, data }) => {
 };
 
 export function Axle({ type, cls, options }) {
-  console.log('call Axle');
+  // console.log('call Axle');
 
   const buildAxlePath = (x, y, numSeg, type) => {
     let d = `M${options.cut(x)} ${options.cut(y)}`;
