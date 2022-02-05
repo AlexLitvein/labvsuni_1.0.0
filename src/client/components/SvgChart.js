@@ -158,7 +158,7 @@ const SvgChart = ({ options, axis, dataSets = [] }) => {
 
   const renderHTextAxle = (x, y, axle) => {
     const arrStrs = [];
-    let delta = (Math.abs(axle.min) + axle.max) / options.numVSeg;
+    let delta = (axle.max - axle.min) / options.numVSeg;
     arrStrs.push(axle.max);
     // arrStrs.push(axle.max+axle.unit);
 

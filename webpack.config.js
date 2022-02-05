@@ -8,7 +8,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js',
+    filename: 'bundle.[fullhash].js',
     assetModuleFilename: 'media/[name][ext][query]',
     clean: true,
   },
@@ -73,7 +73,7 @@ module.exports = {
       template: path.resolve(__dirname, 'src/client', 'index.html'),
     }),
     new MiniCssExtractPlugin({
-      filename: 'style.css',
+      filename: 'style.[fullhash].css',
     }),
   ],
 };

@@ -32,6 +32,8 @@ import CurrSensData from './components/CurrSensData';
 // import ArrowRight from './media/snowflake.svg#arrowright';
 // import { ReactComponent as ArrowRight } from './media/snowflake.svg#arrowright';
 
+const { io } = require('socket.io-client');
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -111,6 +113,7 @@ function App() {
   const [date, setDate] = useState(new Date(Date.now()));
   // const [date, setDate] = useState(new Date('2021-11-01'));
   const [range, setRange] = useState(1);
+  const [stat, setStat] = useState({ visitCount: 0, online: 0 });
   // const [spinAct, setSpinAct] = useState('');
 
   // NOTE! входные данные массив объектов, например:
@@ -187,6 +190,14 @@ function App() {
   };
 
   useEffect(() => {
+    // TODO:
+    // const socket = io('localhost:3000');
+    const socket = io('http://134.90.161.173:80');
+
+    socket.on('statistic', (payload) => {
+      setStat(payload);
+    });
+
     // console.log('App useEffect componentDidMount() fetchData');
     fetchData(date, range);
   }, []); // componentDidMount()
@@ -269,12 +280,14 @@ function App() {
                   Сейчас
                   <br />
                   просматривают:
-                  <br />? человек
+                  <br />
+                  {stat.online} человек
                   <hr></hr>
                   Посещений
                   <br />
                   за сегодня:
-                  <br />?
+                  <br />
+                  {stat.visitCount}
                 </div>
               </div>
               <div className='f2'>©LABvsUNI, 2022</div>

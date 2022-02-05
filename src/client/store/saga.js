@@ -36,6 +36,7 @@ function* fetchSensData(act) {
   try {
     yield put(setStatus('Loading...'));
     const receivedData = yield fetchJson(
+      // TODO:
       // 'http://localhost:3000/weather/getSensData',
       'http://134.90.161.173:80/weather/getSensData',
       act.payload.date,
