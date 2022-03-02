@@ -11,7 +11,7 @@ const logger = require('morgan');
 const errorHandler = require('errorhandler');
 const compression = require('compression');
 // url = 'mongodb://localhost:27017',
-const uri = 'mongodb://labvsuni:lab@134.90.161.173:27617';
+const uri = '';
 // ReactDOMServer = require('react-dom/server'),
 // React = require('react');
 
